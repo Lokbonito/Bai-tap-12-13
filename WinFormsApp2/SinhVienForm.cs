@@ -15,6 +15,7 @@ namespace WinFormsApp2
         public SinhVienForm()
         {
             InitializeComponent();
+
             LoadLop();
             LoadSinhVien();
 
@@ -26,6 +27,8 @@ namespace WinFormsApp2
             string sql = @"SELECT Student.StudentId,
                                   Student.StudentCode,
                                   Student.StudentName,
+                                  Student.Gender,
+                                  Student.BirthDate,
                                   Class.ClassName
                            FROM Student
                            LEFT JOIN Class
@@ -63,8 +66,27 @@ namespace WinFormsApp2
 
                 studentId = Convert.ToInt32(row.Cells["StudentId"].Value);
 
-                txtMaSV.Text = row.Cells["StudentCode"].Value.ToString();
-                txtTenSV.Text = row.Cells["StudentName"].Value.ToString();
+                txtMaSV.Text = row.Cells["StudentCode"].Value?.ToString();
+                txtTenSV.Text = row.Cells["StudentName"].Value?.ToString();
+
+                if (row.Cells["Gender"].Value != DBNull.Value)
+                {
+                    string gender = row.Cells["Gender"].Value.ToString();
+
+                    if (gender == "Nam")
+                        rdoNam.Checked = true;
+                    else
+                        rdoNu.Checked = true;
+                }
+
+                if (row.Cells["BirthDate"].Value != DBNull.Value)
+                {
+                    dtpBirthDate.Value = Convert.ToDateTime(row.Cells["BirthDate"].Value);
+                }
+                else
+                {
+                    dtpBirthDate.Value = DateTime.Now;
+                }
             }
         }
 
@@ -86,13 +108,17 @@ namespace WinFormsApp2
                 return;
             }
 
-            string sql = @"INSERT INTO Student(StudentCode,StudentName,ClassId)
-                   VALUES(@code,@name,@classid)";
+            string gender = rdoNam.Checked ? "Nam" : "Nữ";
+
+            string sql = @"INSERT INTO Student(StudentCode,StudentName,Gender,BirthDate,ClassId)
+                           VALUES(@code,@name,@gender,@birth,@classid)";
 
             SqlCommand cmd = new SqlCommand(sql, conn);
 
             cmd.Parameters.AddWithValue("@code", txtMaSV.Text);
             cmd.Parameters.AddWithValue("@name", txtTenSV.Text);
+            cmd.Parameters.AddWithValue("@gender", gender);
+            cmd.Parameters.AddWithValue("@birth", dtpBirthDate.Value);
             cmd.Parameters.AddWithValue("@classid", cboLop.SelectedValue);
 
             cmd.ExecuteNonQuery();
@@ -102,6 +128,7 @@ namespace WinFormsApp2
             MessageBox.Show("Thêm sinh viên thành công!");
 
             LoadSinhVien();
+            ClearForm();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -114,9 +141,13 @@ namespace WinFormsApp2
 
             conn.Open();
 
+            string gender = rdoNam.Checked ? "Nam" : "Nữ";
+
             string sql = @"UPDATE Student
                            SET StudentCode=@code,
                                StudentName=@name,
+                               Gender=@gender,
+                               BirthDate=@birth,
                                ClassId=@classid
                            WHERE StudentId=@id";
 
@@ -125,13 +156,18 @@ namespace WinFormsApp2
             cmd.Parameters.AddWithValue("@id", studentId);
             cmd.Parameters.AddWithValue("@code", txtMaSV.Text);
             cmd.Parameters.AddWithValue("@name", txtTenSV.Text);
+            cmd.Parameters.AddWithValue("@gender", gender);
+            cmd.Parameters.AddWithValue("@birth", dtpBirthDate.Value);
             cmd.Parameters.AddWithValue("@classid", cboLop.SelectedValue);
 
             cmd.ExecuteNonQuery();
 
             conn.Close();
 
+            MessageBox.Show("Sửa sinh viên thành công!");
+
             LoadSinhVien();
+            ClearForm();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -154,7 +190,10 @@ namespace WinFormsApp2
 
             conn.Close();
 
+            MessageBox.Show("Xóa sinh viên thành công!");
+
             LoadSinhVien();
+            ClearForm();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -162,6 +201,8 @@ namespace WinFormsApp2
             string sql = @"SELECT Student.StudentId,
                                   Student.StudentCode,
                                   Student.StudentName,
+                                  Student.Gender,
+                                  Student.BirthDate,
                                   Class.ClassName
                            FROM Student
                            LEFT JOIN Class
@@ -183,6 +224,19 @@ namespace WinFormsApp2
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        void ClearForm()
+        {
+            txtMaSV.Clear();
+            txtTenSV.Clear();
+            txtSearch.Clear();
+
+            rdoNam.Checked = true;
+
+            dtpBirthDate.Value = DateTime.Now;
+
+            studentId = -1;
         }
     }
 }

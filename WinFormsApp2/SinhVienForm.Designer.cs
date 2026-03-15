@@ -43,6 +43,12 @@
             btnCancel = new Button();
             btnSearch = new Button();
             dgvSinhVien = new DataGridView();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            rdoNam = new RadioButton();
+            rdoNu = new RadioButton();
+            dtpBirthDate = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)dgvSinhVien).BeginInit();
             SuspendLayout();
             // 
@@ -77,7 +83,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 112);
+            label4.Location = new Point(12, 238);
             label4.Name = "label4";
             label4.Size = new Size(27, 15);
             label4.TabIndex = 3;
@@ -86,7 +92,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 243);
+            label5.Location = new Point(12, 369);
             label5.Name = "label5";
             label5.Size = new Size(56, 15);
             label5.TabIndex = 4;
@@ -108,7 +114,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(109, 240);
+            txtSearch.Location = new Point(109, 366);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(201, 23);
             txtSearch.TabIndex = 8;
@@ -116,14 +122,14 @@
             // cboLop
             // 
             cboLop.FormattingEnabled = true;
-            cboLop.Location = new Point(109, 112);
+            cboLop.Location = new Point(109, 238);
             cboLop.Name = "cboLop";
             cboLop.Size = new Size(201, 23);
             cboLop.TabIndex = 9;
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(109, 141);
+            btnThem.Location = new Point(109, 267);
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(75, 23);
             btnThem.TabIndex = 10;
@@ -133,7 +139,7 @@
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(235, 141);
+            btnSua.Location = new Point(235, 267);
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(75, 23);
             btnSua.TabIndex = 11;
@@ -143,7 +149,7 @@
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(109, 194);
+            btnXoa.Location = new Point(109, 320);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(75, 23);
             btnXoa.TabIndex = 12;
@@ -153,7 +159,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(235, 194);
+            btnCancel.Location = new Point(235, 320);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 23);
             btnCancel.TabIndex = 13;
@@ -163,7 +169,7 @@
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(109, 283);
+            btnSearch.Location = new Point(109, 409);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
             btnSearch.TabIndex = 14;
@@ -179,11 +185,74 @@
             dgvSinhVien.Size = new Size(452, 394);
             dgvSinhVien.TabIndex = 15;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(0, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 16;
+            label6.Text = "label6";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(12, 119);
+            label7.Name = "label7";
+            label7.Size = new Size(52, 15);
+            label7.TabIndex = 17;
+            label7.Text = "Giới tính";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 171);
+            label8.Name = "label8";
+            label8.Size = new Size(60, 15);
+            label8.TabIndex = 18;
+            label8.Text = "Ngày sinh";
+            // 
+            // rdoNam
+            // 
+            rdoNam.AutoSize = true;
+            rdoNam.Location = new Point(109, 119);
+            rdoNam.Name = "rdoNam";
+            rdoNam.Size = new Size(51, 19);
+            rdoNam.TabIndex = 19;
+            rdoNam.TabStop = true;
+            rdoNam.Text = "Nam";
+            rdoNam.UseVisualStyleBackColor = true;
+            // 
+            // rdoNu
+            // 
+            rdoNu.AutoSize = true;
+            rdoNu.Location = new Point(216, 119);
+            rdoNu.Name = "rdoNu";
+            rdoNu.Size = new Size(41, 19);
+            rdoNu.TabIndex = 20;
+            rdoNu.TabStop = true;
+            rdoNu.Text = "Nữ";
+            rdoNu.UseVisualStyleBackColor = true;
+            // 
+            // dtpBirthDate
+            // 
+            dtpBirthDate.Format = DateTimePickerFormat.Short;
+            dtpBirthDate.Location = new Point(109, 171);
+            dtpBirthDate.Name = "dtpBirthDate";
+            dtpBirthDate.Size = new Size(200, 23);
+            dtpBirthDate.TabIndex = 21;
+            // 
             // SinhVienForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dtpBirthDate);
+            Controls.Add(rdoNu);
+            Controls.Add(rdoNam);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
             Controls.Add(dgvSinhVien);
             Controls.Add(btnSearch);
             Controls.Add(btnCancel);
@@ -223,5 +292,11 @@
         private Button btnCancel;
         private Button btnSearch;
         private DataGridView dgvSinhVien;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private RadioButton rdoNam;
+        private RadioButton rdoNu;
+        private DateTimePicker dtpBirthDate;
     }
 }
