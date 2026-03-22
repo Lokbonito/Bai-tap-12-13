@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsApp2
@@ -17,16 +10,26 @@ namespace WinFormsApp2
             InitializeComponent();
         }
 
-        private void btnQLSV_Click(object sender, EventArgs e)
+        private void OpenChildForm(Form childForm)
         {
-            SinhVienForm f = new SinhVienForm();
-            f.Show();
+            panelMain.Controls.Clear();
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+
+            panelMain.Controls.Add(childForm);
+            childForm.Show();
         }
 
-        private void btnQLL_Click(object sender, EventArgs e)
+        private void btnSinhVien_Click(object sender, EventArgs e)
         {
-            LopForm f = new LopForm();
-            f.Show();
+            OpenChildForm(new SinhVienForm());
+        }
+
+        private void btnLop_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new LopForm());
         }
     }
 }
